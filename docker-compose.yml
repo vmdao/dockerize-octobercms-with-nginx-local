@@ -1,0 +1,21 @@
+version: '2'
+services:
+    october:
+        image: aspendigital/octobercms:php5.6-fpm
+        ports: 
+            - "9006:9000"
+        volumes: 
+            - ./src:your_dir_project
+            - ./config/php/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+        links:
+            - mysql
+        restart: always
+    mysql: 
+        image: mysql:latest
+        volumes: 
+            - ./data/db-data:/var/lib/mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD=Abc@#123456
+            - MYSQL_DATABASE=octoberdb_blog
+        restart: always
+  
